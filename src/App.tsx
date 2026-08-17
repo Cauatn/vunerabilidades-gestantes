@@ -18,8 +18,9 @@ function App() {
           </div>
           <div className="flex items-center gap-2">
             <Badge>Padrão</Badge>
-            <Badge variant="secondary">Secundário</Badge>
-            <Badge variant="destructive">Alerta</Badge>
+            <Badge variant="green">Sucesso</Badge>
+            <Badge variant="red">Alerta</Badge>
+            <Badge variant="neutral">Neutro</Badge>
             <Badge variant="outline">Contorno</Badge>
           </div>
           <Button>Continuar</Button>

@@ -10,19 +10,25 @@ const buttonVariants = cva(
 	{
 		variants: {
 			variant: {
-				default: 'bg-primary text-primary-foreground shadow-xs hover:bg-primary/90',
+				primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
 				destructive:
-					'bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
-				outline:
-					'border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50',
-				secondary: 'bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80',
-				ghost: 'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
+					'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
+				outline: 'border border-n-40 bg-n-0 hover:bg-n-10',
+				'outline-danger': 'border border-danger bg-n-0 hover:bg-r-100',
+				secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+				ghost: 'hover:bg-n-20 hover:text-accent-foreground dark:hover:bg-n-20/50',
 				link: 'text-primary underline-offset-4 hover:underline',
+				default:
+					'border-transparent bg-accent-mint font-bold tracking-[0.2px] text-white shadow-xs hover:bg-brand-hover active:bg-brand-pressed focus-visible:border-transparent focus-visible:ring-accent-mint/40 dark:focus-visible:ring-accent-mint/40 bg-g-400 hover:bg-g-600 active:bg-g-700',
+				warning:
+					'border-transparent bg-y-400 font-bold tracking-[0.2px] text-white shadow-xs hover:bg-y-600 active:bg-y-700 focus-visible:border-transparent focus-visible:ring-y-400/40',
+				danger: 'border-transparent bg-r-500 font-bold tracking-[0.2px] text-white shadow-xs hover:bg-r-600 active:bg-r-700 focus-visible:border-transparent focus-visible:ring-r-500/40',
 			},
 			size: {
-				default: 'h-9 px-4 py-2 has-[>svg]:px-3',
-				sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
-				lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
+				sm: "h-10 md:h-8 min-h-10 md:min-h-8 gap-2 rounded-md px-4 text-sm md:text-xs font-bold tracking-[0.2px] has-[>svg]:px-3 [&_svg:not([class*='size-'])]:size-3.5",
+				default:
+					"h-11 md:h-10 min-h-11 md:min-h-10 gap-2 rounded-md px-5 text-base md:text-sm font-bold tracking-[0.2px] has-[>svg]:px-4 [&_svg:not([class*='size-'])]:size-4",
+				lg: "h-12 min-h-12 gap-2 rounded-md px-6 text-base font-bold tracking-[0.2px] has-[>svg]:px-5 [&_svg:not([class*='size-'])]:size-4",
 				icon: 'size-9',
 				'icon-sm': 'size-8',
 				'icon-lg': 'size-10',
