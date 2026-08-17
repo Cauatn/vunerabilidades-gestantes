@@ -30,8 +30,7 @@ export function ResultadoAvaliacao({
 	onVoltar,
 }: ResultadoAvaliacaoProps) {
 	return (
-		<div className="flex min-h-svh items-center justify-center bg-slate-50 p-8">
-			<Card className="w-full max-w-2xl items-center gap-6 p-10 text-center">
+		<Card className="w-full max-w-2xl items-center gap-6 p-10 text-center">
 				<div>
 					<h1 className="text-[22px] font-bold text-(--color-heading)">Resultado da Avaliação</h1>
 					<p className="mt-1 text-[15px] text-(--color-muted-text)">
@@ -91,6 +90,5 @@ export function ResultadoAvaliacao({
 					)}
 				</div>
 			</Card>
-		</div>
 	)
 }

@@ -62,7 +62,7 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 	const progresso = Math.round((respondidas / PERGUNTAS.length) * 100)
 
 	return (
-		<div className="flex min-h-svh items-center justify-center bg-slate-50 p-8">
+		<>
 			<Card className="w-full max-w-2xl gap-6 p-2">
 				<div className="px-6 pt-4">
 					<h1 className="text-[22px] font-bold text-(--color-heading)">Aplicação da Escala</h1>
@@ -119,6 +119,6 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 				Exemplo de uma dimensão da escala — as demais dimensões seguem o mesmo padrão de pergunta e
 				resposta.
 			</p>
-		</div>
+		</>
 	)
 }

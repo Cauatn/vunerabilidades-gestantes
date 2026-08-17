@@ -1,7 +1,9 @@
 import { useState } from 'react'
 
+import { AppShell } from '@/components/AppShell'
 import { FormularioExemplo } from '@/features/avaliacao/components/FormularioExemplo'
 import { ResultadoAvaliacao } from '@/features/avaliacao/components/ResultadoAvaliacao'
+import type { Tela } from '@/features/core/components/AppSidebar'
 
 function calcularPontuacao(respostas: Record<string, string>) {
 	const pesos: Record<string, number> = {
@@ -23,27 +25,27 @@ function classificar(pontuacao: number) {
 }
 
 function App() {
-	const [tela, setTela] = useState<'formulario' | 'resultado'>('formulario')
+	const [tela, setTela] = useState<Tela>('formulario')
 	const [respostas, setRespostas] = useState<Record<string, string>>({})
-
-	if (tela === 'resultado') {
-		const pontuacao = calcularPontuacao(respostas)
-		return (
-			<ResultadoAvaliacao
-				pontuacao={pontuacao}
-				classificacao={classificar(pontuacao)}
-				onVoltar={() => setTela('formulario')}
-			/>
-		)
-	}
+	const pontuacao = calcularPontuacao(respostas)
 
 	return (
-		<FormularioExemplo
-			onProximo={(r) => {
-				setRespostas(r)
-				setTela('resultado')
-			}}
-		/>
+		<AppShell activeTela={tela} onNavigate={setTela}>
+			{tela === 'resultado' ? (
+				<ResultadoAvaliacao
+					pontuacao={pontuacao}
+					classificacao={classificar(pontuacao)}
+					onVoltar={() => setTela('formulario')}
+				/>
+			) : (
+				<FormularioExemplo
+					onProximo={(r) => {
+						setRespostas(r)
+						setTela('resultado')
+					}}
+				/>
+			)}
+		</AppShell>
 	)
 }
 
