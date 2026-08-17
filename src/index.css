@@ -134,6 +134,26 @@
 	--spacing-section: 1.5rem;
 	--radius-item: 0.5rem;
 	--radius-card: 1.5rem;
+
+	/* Identidade visual do app "Escala de Vulnerabilidade Social no Pré-Natal" (Figma) */
+	--color-heading: #1e3a8a;
+	--color-cta: #2563eb;
+	--color-cta-foreground: #ffffff;
+	--color-success: #16a34a;
+	--color-success-strong: #22c55e;
+	--color-body: #374151;
+	--color-muted-text: #6b7280;
+
+	--color-risk-low-bg: #ecfdf5;
+	--color-risk-low-fg: #16a34a;
+	--color-risk-moderate-bg: #ffdcbe;
+	--color-risk-moderate-fg: #fe952c;
+	--color-risk-high-bg: #ffe3e0;
+	--color-risk-high-fg: #ff090d;
+
+	--color-note-bg: #ecfdf5;
+	--color-note-border: #02542d;
+	--color-note-fg: #374151;
 }
 
 html,
