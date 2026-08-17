@@ -17,8 +17,8 @@ import { cn } from '@/lib/utils'
 export type Tela = 'formulario' | 'resultado'
 
 const navItems: { tela: Tela; title: string; icon: React.ReactNode }[] = [
-	{ tela: 'formulario', title: 'Aplicação da Escala', icon: <ClipboardList className="size-5 shrink-0" /> },
-	{ tela: 'resultado', title: 'Resultado', icon: <CheckCircle2 className="size-5 shrink-0" /> },
+	{ tela: 'formulario', title: 'Aplicação da Escala', icon: <ClipboardList className="size-6 shrink-0" /> },
+	{ tela: 'resultado', title: 'Resultado', icon: <CheckCircle2 className="size-6 shrink-0" /> },
 ]
 
 function SidebarCollapseTrigger() {
@@ -59,8 +59,12 @@ export function AppSidebar({ activeTela, onNavigate }: { activeTela: Tela; onNav
 								<SidebarMenuItem key={item.tela}>
 									<SidebarMenuButton
 										isActive={isActive}
+										size="lg"
 										onClick={() => onNavigate(item.tela)}
-										className={cn('sidebar-nav-item-icon', isActive ? 'sidebar-nav-btn-active' : 'sidebar-nav-btn-idle')}
+										className={cn(
+											'sidebar-nav-item-icon gap-3 px-3 text-base',
+											isActive ? 'sidebar-nav-btn-active' : 'sidebar-nav-btn-idle',
+										)}
 									>
 										{item.icon}
 										<span className="min-w-0 flex-1 truncate group-data-[collapsible=icon]:hidden">{item.title}</span>
