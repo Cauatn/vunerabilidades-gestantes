@@ -1,7 +1,7 @@
 import { Info } from 'lucide-react'
 
+import { Page } from '@/components/Layout/Page'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 
 type Classificacao = 'BAIXA' | 'MODERADA' | 'ALTA'
@@ -30,17 +30,11 @@ export function ResultadoAvaliacao({
 	onVoltar,
 }: ResultadoAvaliacaoProps) {
 	return (
-		<Card className="w-full max-w-2xl items-center gap-6 p-10 text-center">
-				<div>
-					<h1 className="text-[22px] font-bold text-(--color-heading)">Resultado da Avaliação</h1>
-					<p className="mt-1 text-[15px] text-(--color-muted-text)">
-						Resultado da aplicação da Escala
-					</p>
-				</div>
-
+		<Page title="Resultado da Avaliação" description="Resultado da aplicação da Escala">
+			<div className="flex max-w-2xl flex-col items-center gap-6 border-t border-n-30 pt-8 text-center">
 				<div className="flex size-[120px] flex-col items-center justify-center rounded-full border-4 border-p-400">
 					<span className="text-4xl font-bold text-p-400">{pontuacao}</span>
-					<span className="text-[13px] font-bold text-(--color-muted-text)">
+					<span className="text-[13px] font-bold text-n-500">
 						Pontuação
 						<br />
 						ilustrativa
@@ -48,7 +42,7 @@ export function ResultadoAvaliacao({
 				</div>
 
 				<div>
-					<p className="text-base font-bold text-(--color-body)">Vulnerabilidade Social</p>
+					<p className="text-base font-bold text-n-700">Vulnerabilidade Social</p>
 					<p className={cn('text-2xl font-bold', CLASSIFICACAO_COR[classificacao])}>
 						{classificacao}
 					</p>
@@ -87,6 +81,7 @@ export function ResultadoAvaliacao({
 						</Button>
 					)}
 				</div>
-			</Card>
+			</div>
+		</Page>
 	)
 }

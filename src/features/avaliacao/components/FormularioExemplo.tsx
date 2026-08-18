@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
+import { Page } from '@/components/Layout/Page'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 
 interface Pergunta {
@@ -36,11 +36,11 @@ function RadioOption({
 		<button
 			type="button"
 			onClick={onSelect}
-			className="flex items-center gap-3 py-2 text-left text-[15px] text-black"
+			className="flex items-center gap-3 py-2 text-left text-[15px] text-n-700"
 		>
 			<span
 				className={cn(
-					'flex size-6 shrink-0 items-center justify-center rounded-full border-2 border-[#9ca3af]',
+					'flex size-6 shrink-0 items-center justify-center rounded-full border-2 border-n-100',
 					selected && 'border-p-500',
 				)}
 			>
@@ -62,30 +62,21 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 	const progresso = Math.round((respondidas / PERGUNTAS.length) * 100)
 
 	return (
-		<>
-			<Card className="w-full max-w-2xl gap-6 p-2">
-				<div className="px-6 pt-4">
-					<h1 className="text-[22px] font-bold text-(--color-heading)">Aplicação da Escala</h1>
-					<p className="mt-1 text-[15px] text-(--color-muted-text)">
-						Preencha as informações básicas.
-					</p>
+		<Page title="Aplicação da Escala" description="Preencha as informações básicas.">
+			<div className="max-w-2xl space-y-8">
+				<div className="h-2 w-full rounded-full bg-n-30">
+					<div
+						className="h-2 rounded-full bg-p-400 transition-all"
+						style={{ width: `${Math.max(progresso, 12)}%` }}
+					/>
 				</div>
 
-				<div className="px-6">
-					<div className="h-2 w-full rounded-full bg-[#e5e7eb]">
-						<div
-							className="h-2 rounded-full bg-p-400 transition-all"
-							style={{ width: `${Math.max(progresso, 12)}%` }}
-						/>
-					</div>
-				</div>
-
-				<div className="flex flex-col gap-8 px-6">
+				<div className="flex flex-col gap-8">
 					<p className="text-lg font-semibold text-p-600">Condições socioeconômicas</p>
 
 					{PERGUNTAS.map((pergunta) => (
 						<div key={pergunta.id} className="flex flex-col gap-1">
-							<p className="mb-1 text-[15px] font-medium text-(--color-body)">{pergunta.texto}</p>
+							<p className="mb-1 text-[15px] font-medium text-n-700">{pergunta.texto}</p>
 							{pergunta.opcoes.map((opcao) => (
 								<RadioOption
 									key={opcao}
@@ -98,7 +89,7 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 					))}
 				</div>
 
-				<div className="flex items-center justify-between px-6 pb-6">
+				<div className="flex items-center justify-between border-t border-n-30 pt-6">
 					<Button variant="outline" className="border-p-500 text-p-500 hover:bg-p-50">
 						VOLTAR
 					</Button>
@@ -109,12 +100,12 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 						PRÓXIMA →
 					</Button>
 				</div>
-			</Card>
 
-			<p className="sr-only">
-				Exemplo de uma dimensão da escala — as demais dimensões seguem o mesmo padrão de pergunta e
-				resposta.
-			</p>
-		</>
+				<p className="sr-only">
+					Exemplo de uma dimensão da escala — as demais dimensões seguem o mesmo padrão de
+					pergunta e resposta.
+				</p>
+			</div>
+		</Page>
 	)
 }
