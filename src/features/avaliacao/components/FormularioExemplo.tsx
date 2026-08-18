@@ -3,25 +3,7 @@ import { useState } from 'react'
 import { Page } from '@/components/Layout/Page'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-
-interface Pergunta {
-	id: string
-	texto: string
-	opcoes: string[]
-}
-
-const PERGUNTAS: Pergunta[] = [
-	{
-		id: 'renda',
-		texto: '1. A renda familiar é suficiente para atender às necessidades básicas?',
-		opcoes: ['Sim', 'Parcialmente', 'Não'],
-	},
-	{
-		id: 'vinculo',
-		texto: '2. A gestante possui vínculo empregatício?',
-		opcoes: ['Sim', 'Não', 'Trabalho informal'],
-	},
-]
+import { PERGUNTAS } from '@/features/avaliacao/constants'
 
 function RadioOption({
 	label,
@@ -75,9 +57,11 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 					<p className="text-lg font-semibold text-p-600">Condições socioeconômicas</p>
 
 					<div className="grid grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-2">
-						{PERGUNTAS.map((pergunta) => (
+						{PERGUNTAS.map((pergunta, index) => (
 							<div key={pergunta.id} className="flex flex-col gap-1">
-								<p className="mb-1 text-[15px] font-medium text-n-700">{pergunta.texto}</p>
+								<p className="mb-1 text-[15px] font-medium text-n-700">
+									{index + 1}. {pergunta.texto}
+								</p>
 								{pergunta.opcoes.map((opcao) => (
 									<RadioOption
 										key={opcao}
