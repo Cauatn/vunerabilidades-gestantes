@@ -36,7 +36,7 @@ function RadioOption({
 		<button
 			type="button"
 			onClick={onSelect}
-			className="flex items-center gap-3 whitespace-nowrap text-left text-[15px] text-n-700"
+			className="flex items-center gap-3 py-1 text-left text-[15px] text-n-700"
 		>
 			<span
 				className={cn(
@@ -71,13 +71,13 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 					/>
 				</div>
 
-				<div className="flex flex-col gap-8">
+				<div className="flex flex-col gap-4">
 					<p className="text-lg font-semibold text-p-600">Condições socioeconômicas</p>
 
-					{PERGUNTAS.map((pergunta) => (
-						<div key={pergunta.id} className="flex flex-col gap-3">
-							<p className="text-[15px] font-medium text-n-700">{pergunta.texto}</p>
-							<div className="flex flex-wrap items-center gap-x-10 gap-y-3">
+					<div className="grid grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-2">
+						{PERGUNTAS.map((pergunta) => (
+							<div key={pergunta.id} className="flex flex-col gap-1">
+								<p className="mb-1 text-[15px] font-medium text-n-700">{pergunta.texto}</p>
 								{pergunta.opcoes.map((opcao) => (
 									<RadioOption
 										key={opcao}
@@ -87,8 +87,8 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 									/>
 								))}
 							</div>
-						</div>
-					))}
+						))}
+					</div>
 				</div>
 
 				<div className="flex items-center justify-between border-t border-n-30 pt-6">
