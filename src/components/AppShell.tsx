@@ -16,7 +16,7 @@ export function AppShell({
 		<SidebarProvider>
 			<AppSidebar activeTela={activeTela} onNavigate={onNavigate} />
 			<SidebarInset className="bg-n-0">
-				<div className="min-w-0 flex-1 overflow-auto p-page">{children}</div>
+				<div className="flex min-w-0 flex-1 flex-col overflow-auto p-page">{children}</div>
 			</SidebarInset>
 		</SidebarProvider>
 	)

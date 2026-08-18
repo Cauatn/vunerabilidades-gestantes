@@ -63,7 +63,7 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 
 	return (
 		<Page title="Aplicação da Escala" description="Preencha as informações básicas.">
-			<div className="max-w-4xl space-y-8">
+			<div className="flex h-full max-w-4xl flex-col space-y-8">
 				<div className="h-2 w-full max-w-2xl rounded-full bg-n-30">
 					<div
 						className="h-2 rounded-full bg-p-400 transition-all"
@@ -91,7 +91,7 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 					</div>
 				</div>
 
-				<div className="flex items-center justify-between border-t border-n-30 pt-6">
+				<div className="mt-auto flex items-center justify-between border-t border-n-30 pt-6">
 					<Button variant="outline" className="border-p-500 text-p-500 hover:bg-p-50">
 						VOLTAR
 					</Button>
