@@ -1,6 +1,6 @@
-import { ClipboardList, CheckCircle2, PanelLeft, PanelLeftClose } from 'lucide-react'
+import { CheckCircle2, ClipboardList, PanelLeft, PanelLeftClose, Settings, Users } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
 
-import { Button } from '@/components/ui/button'
 import {
 	Sidebar,
 	SidebarContent,
@@ -12,13 +12,14 @@ import {
 	SidebarMenuItem,
 	useSidebar,
 } from '@/components/ui/sidebar'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
-export type Tela = 'formulario' | 'resultado'
-
-const navItems: { tela: Tela; title: string; icon: React.ReactNode }[] = [
-	{ tela: 'formulario', title: 'Aplicação da Escala', icon: <ClipboardList className="size-6 shrink-0" /> },
-	{ tela: 'resultado', title: 'Resultado', icon: <CheckCircle2 className="size-6 shrink-0" /> },
+const navItems: { url: string; title: string; icon: React.ReactNode }[] = [
+	{ url: '/', title: 'Pacientes', icon: <Users className="size-6 shrink-0" /> },
+	{ url: '/formulario', title: 'Aplicação da Escala', icon: <ClipboardList className="size-6 shrink-0" /> },
+	{ url: '/resultado', title: 'Resultado', icon: <CheckCircle2 className="size-6 shrink-0" /> },
+	{ url: '/configuracao', title: 'Configurar Formulário', icon: <Settings className="size-6 shrink-0" /> },
 ]
 
 function SidebarCollapseTrigger() {
@@ -30,22 +31,24 @@ function SidebarCollapseTrigger() {
 			type="button"
 			variant="ghost"
 			size="icon"
-			className="size-9 shrink-0 text-n-700 hover:bg-n-20"
+			className="size-11 shrink-0 text-n-700 hover:bg-n-20 md:size-8"
 			onClick={toggleSidebar}
 			aria-label={collapsed ? 'Expandir menu' : 'Recolher menu'}
 		>
-			{collapsed ? <PanelLeft className="size-5" /> : <PanelLeftClose className="size-5" />}
+			{collapsed ? <PanelLeft className="size-6 md:size-5" /> : <PanelLeftClose className="size-6 md:size-5" />}
 		</Button>
 	)
 }
 
-export function AppSidebar({ activeTela, onNavigate }: { activeTela: Tela; onNavigate: (tela: Tela) => void }) {
+export function AppSidebar() {
+	const location = useLocation()
+
 	return (
 		<Sidebar collapsible="icon" className="border-r border-n-40 **:data-[sidebar=sidebar]:border-0">
 			<SidebarHeader className="gap-0 border-b border-n-30 p-4">
 				<div className="flex w-full items-center justify-between gap-2 group-data-[collapsible=icon]:justify-center">
 					<div className="min-w-0 group-data-[collapsible=icon]:hidden">
-						<span className="block truncate text-xl font-bold tracking-tight text-p-600">Pré-Natal</span>
+						<span className="block truncate text-2xl font-bold tracking-tight text-p-600">Pré-Natal</span>
 					</div>
 					<SidebarCollapseTrigger />
 				</div>
@@ -54,20 +57,24 @@ export function AppSidebar({ activeTela, onNavigate }: { activeTela: Tela; onNav
 				<SidebarGroup className="p-0">
 					<SidebarMenu>
 						{navItems.map((item) => {
-							const isActive = item.tela === activeTela
+							const isActive = location.pathname === item.url
 							return (
-								<SidebarMenuItem key={item.tela}>
+								<SidebarMenuItem key={item.url}>
 									<SidebarMenuButton
+										asChild
 										isActive={isActive}
 										size="lg"
-										onClick={() => onNavigate(item.tela)}
 										className={cn(
 											'sidebar-nav-item-icon gap-3 px-3 text-base',
 											isActive ? 'sidebar-nav-btn-active' : 'sidebar-nav-btn-idle',
 										)}
 									>
-										{item.icon}
-										<span className="min-w-0 flex-1 truncate group-data-[collapsible=icon]:hidden">{item.title}</span>
+										<Link to={item.url}>
+											{item.icon}
+											<span className="min-w-0 flex-1 truncate group-data-[collapsible=icon]:hidden">
+												{item.title}
+											</span>
+										</Link>
 									</SidebarMenuButton>
 								</SidebarMenuItem>
 							)
