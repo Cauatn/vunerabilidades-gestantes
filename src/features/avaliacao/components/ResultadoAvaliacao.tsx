@@ -38,8 +38,8 @@ export function ResultadoAvaliacao({
 					</p>
 				</div>
 
-				<div className="flex size-[120px] flex-col items-center justify-center rounded-full border-4 border-(--color-success-strong)">
-					<span className="text-4xl font-bold text-(--color-success-strong)">{pontuacao}</span>
+				<div className="flex size-[120px] flex-col items-center justify-center rounded-full border-4 border-p-400">
+					<span className="text-4xl font-bold text-p-400">{pontuacao}</span>
 					<span className="text-[13px] font-bold text-(--color-muted-text)">
 						Pontuação
 						<br />
@@ -80,9 +80,7 @@ export function ResultadoAvaliacao({
 				</div>
 
 				<div className="flex w-full max-w-xs flex-col gap-3">
-					<Button className="bg-(--color-cta) text-(--color-cta-foreground) hover:bg-(--color-cta)/90">
-						VER RECOMENDAÇÕES →
-					</Button>
+					<Button>VER RECOMENDAÇÕES →</Button>
 					{onVoltar && (
 						<Button variant="ghost" onClick={onVoltar}>
 							Voltar ao formulário

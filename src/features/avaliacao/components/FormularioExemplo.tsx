@@ -41,10 +41,10 @@ function RadioOption({
 			<span
 				className={cn(
 					'flex size-6 shrink-0 items-center justify-center rounded-full border-2 border-[#9ca3af]',
-					selected && 'border-(--color-cta)',
+					selected && 'border-p-500',
 				)}
 			>
-				{selected && <span className="size-3 rounded-full bg-(--color-cta)" />}
+				{selected && <span className="size-3 rounded-full bg-p-500" />}
 			</span>
 			{label}
 		</button>
@@ -74,14 +74,14 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 				<div className="px-6">
 					<div className="h-2 w-full rounded-full bg-[#e5e7eb]">
 						<div
-							className="h-2 rounded-full bg-(--color-success) transition-all"
+							className="h-2 rounded-full bg-p-400 transition-all"
 							style={{ width: `${Math.max(progresso, 12)}%` }}
 						/>
 					</div>
 				</div>
 
 				<div className="flex flex-col gap-8 px-6">
-					<p className="text-lg font-semibold text-(--color-success)">Condições socioeconômicas</p>
+					<p className="text-lg font-semibold text-p-600">Condições socioeconômicas</p>
 
 					{PERGUNTAS.map((pergunta) => (
 						<div key={pergunta.id} className="flex flex-col gap-1">
@@ -99,14 +99,10 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 				</div>
 
 				<div className="flex items-center justify-between px-6 pb-6">
-					<Button
-						variant="outline"
-						className="border-(--color-cta) text-(--color-cta) hover:bg-(--color-cta)/5"
-					>
+					<Button variant="outline" className="border-p-500 text-p-500 hover:bg-p-50">
 						VOLTAR
 					</Button>
 					<Button
-						className="bg-(--color-cta) text-(--color-cta-foreground) hover:bg-(--color-cta)/90"
 						disabled={respondidas < PERGUNTAS.length}
 						onClick={() => onProximo?.(respostas)}
 					>
