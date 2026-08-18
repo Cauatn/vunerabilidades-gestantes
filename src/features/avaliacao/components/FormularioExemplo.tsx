@@ -36,7 +36,7 @@ function RadioOption({
 		<button
 			type="button"
 			onClick={onSelect}
-			className="flex items-center gap-3 py-2 text-left text-[15px] text-n-700"
+			className="flex items-center gap-3 whitespace-nowrap text-left text-[15px] text-n-700"
 		>
 			<span
 				className={cn(
@@ -63,8 +63,8 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 
 	return (
 		<Page title="Aplicação da Escala" description="Preencha as informações básicas.">
-			<div className="max-w-2xl space-y-8">
-				<div className="h-2 w-full rounded-full bg-n-30">
+			<div className="max-w-4xl space-y-8">
+				<div className="h-2 w-full max-w-2xl rounded-full bg-n-30">
 					<div
 						className="h-2 rounded-full bg-p-400 transition-all"
 						style={{ width: `${Math.max(progresso, 12)}%` }}
@@ -75,16 +75,18 @@ export function FormularioExemplo({ onProximo }: FormularioExemploProps) {
 					<p className="text-lg font-semibold text-p-600">Condições socioeconômicas</p>
 
 					{PERGUNTAS.map((pergunta) => (
-						<div key={pergunta.id} className="flex flex-col gap-1">
-							<p className="mb-1 text-[15px] font-medium text-n-700">{pergunta.texto}</p>
-							{pergunta.opcoes.map((opcao) => (
-								<RadioOption
-									key={opcao}
-									label={opcao}
-									selected={respostas[pergunta.id] === opcao}
-									onSelect={() => setRespostas((r) => ({ ...r, [pergunta.id]: opcao }))}
-								/>
-							))}
+						<div key={pergunta.id} className="flex flex-col gap-3">
+							<p className="text-[15px] font-medium text-n-700">{pergunta.texto}</p>
+							<div className="flex flex-wrap items-center gap-x-10 gap-y-3">
+								{pergunta.opcoes.map((opcao) => (
+									<RadioOption
+										key={opcao}
+										label={opcao}
+										selected={respostas[pergunta.id] === opcao}
+										onSelect={() => setRespostas((r) => ({ ...r, [pergunta.id]: opcao }))}
+									/>
+								))}
+							</div>
 						</div>
 					))}
 				</div>
