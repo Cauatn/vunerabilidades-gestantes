@@ -1,14 +1,17 @@
 import { AppRoutes } from '@/appRoutes'
 import { PerguntasProvider } from '@/features/avaliacao/composables/usePerguntasStore'
-import { PacientesProvider } from '@/features/pacientes/composables/usePacientesStore'
+import { GestantesProvider } from '@/features/gestantes/composables/useGestantesStore'
+import { UsuariosProvider } from '@/features/usuarios/composables/useUsuariosStore'
 
 function App() {
 	return (
-		<PacientesProvider>
-			<PerguntasProvider>
-				<AppRoutes />
-			</PerguntasProvider>
-		</PacientesProvider>
+		<UsuariosProvider>
+			<GestantesProvider>
+				<PerguntasProvider>
+					<AppRoutes />
+				</PerguntasProvider>
+			</GestantesProvider>
+		</UsuariosProvider>
 	)
 }
 

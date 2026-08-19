@@ -1,5 +1,6 @@
-import { CheckCircle2, ClipboardList, PanelLeft, PanelLeftClose, Settings, Users } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import { DoorOpen, House, PanelLeft, PanelLeftClose, Settings, Stethoscope, Users } from 'lucide-react'
+import { useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import {
 	Sidebar,
@@ -13,13 +14,18 @@ import {
 	useSidebar,
 } from '@/components/ui/sidebar'
 import { Button } from '@/components/ui/button'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { UNIDADES_SAUDE } from '@/features/core/constants/unidadesSaude'
 import { cn } from '@/lib/utils'
 
 const navItems: { url: string; title: string; icon: React.ReactNode }[] = [
-	{ url: '/', title: 'Pacientes', icon: <Users className="size-6 shrink-0" /> },
-	{ url: '/formulario', title: 'Aplicação da Escala', icon: <ClipboardList className="size-6 shrink-0" /> },
-	{ url: '/resultado', title: 'Resultado', icon: <CheckCircle2 className="size-6 shrink-0" /> },
-	{ url: '/configuracao', title: 'Configurar Formulário', icon: <Settings className="size-6 shrink-0" /> },
+	{ url: '/usuarios', title: 'Usuários', icon: <Users className="size-6 shrink-0" /> },
+	{ url: '/', title: 'Gestantes', icon: <House className="size-6 shrink-0" /> },
+]
+
+const aplicacoesSubItens: { url: string; title: string }[] = [
+	{ url: '/formulario', title: 'Nova' },
+	{ url: '/historico', title: 'Histórico' },
 ]
 
 function SidebarCollapseTrigger() {
@@ -42,6 +48,8 @@ function SidebarCollapseTrigger() {
 
 export function AppSidebar() {
 	const location = useLocation()
+	const navigate = useNavigate()
+	const [unidade, setUnidade] = useState(UNIDADES_SAUDE[0])
 
 	return (
 		<Sidebar collapsible="icon" className="border-r border-n-40 **:data-[sidebar=sidebar]:border-0">
@@ -54,7 +62,7 @@ export function AppSidebar() {
 				</div>
 			</SidebarHeader>
 			<SidebarContent className="gap-0 px-3 py-4 group-data-[collapsible=icon]:px-0">
-				<SidebarGroup className="p-0">
+				<SidebarGroup className="gap-1 p-0">
 					<SidebarMenu>
 						{navItems.map((item) => {
 							const isActive = location.pathname === item.url
@@ -79,11 +87,91 @@ export function AppSidebar() {
 								</SidebarMenuItem>
 							)
 						})}
+
+						<SidebarMenuItem className="group-data-[collapsible=icon]:hidden">
+							<div className="flex items-center gap-3 px-3 py-3 text-base text-n-700">
+								<Stethoscope className="size-6 shrink-0" />
+								<span>Aplicações</span>
+							</div>
+							<div className="flex gap-3 px-[calc(0.75rem+0.75rem)]">
+								<div className="w-px shrink-0 bg-n-40" />
+								<div className="flex flex-col gap-2 py-0.5 text-sm">
+									{aplicacoesSubItens.map((item) => {
+										const isActive = location.pathname === item.url
+										return (
+											<Link
+												key={item.url}
+												to={item.url}
+												className={cn(
+													isActive ? 'font-semibold text-p-600' : 'font-normal text-n-600 hover:text-n-800',
+												)}
+											>
+												{item.title}
+											</Link>
+										)
+									})}
+								</div>
+							</div>
+						</SidebarMenuItem>
+					</SidebarMenu>
+				</SidebarGroup>
+
+				<div className="my-4 h-px bg-n-30 group-data-[collapsible=icon]:hidden" />
+
+				<SidebarGroup className="p-0">
+					<SidebarMenu>
+						<SidebarMenuItem>
+							<SidebarMenuButton
+								asChild
+								isActive={location.pathname === '/configuracao'}
+								size="lg"
+								className={cn(
+									'sidebar-nav-item-icon gap-3 px-3 text-base',
+									location.pathname === '/configuracao' ? 'sidebar-nav-btn-active' : 'sidebar-nav-btn-idle',
+								)}
+							>
+								<Link to="/configuracao">
+									<Settings className="size-6 shrink-0" />
+									<span className="min-w-0 flex-1 truncate group-data-[collapsible=icon]:hidden">Configurações</span>
+								</Link>
+							</SidebarMenuButton>
+						</SidebarMenuItem>
 					</SidebarMenu>
 				</SidebarGroup>
 			</SidebarContent>
-			<SidebarFooter className="p-4 group-data-[collapsible=icon]:hidden">
-				<p className="text-xs text-n-400">Versão 1.0 (Protótipo)</p>
+			<SidebarFooter className="gap-4 border-t border-n-30 p-4 group-data-[collapsible=icon]:hidden">
+				<Select value={unidade} onValueChange={setUnidade}>
+					<SelectTrigger className="w-full">
+						<SelectValue />
+					</SelectTrigger>
+					<SelectContent>
+						{UNIDADES_SAUDE.map((nome) => (
+							<SelectItem key={nome} value={nome}>
+								{nome}
+							</SelectItem>
+						))}
+					</SelectContent>
+				</Select>
+
+				<div className="flex items-center justify-between gap-2">
+					<div className="flex min-w-0 items-center gap-3">
+						<div className="sidebar-footer-avatar">JV</div>
+						<div className="min-w-0">
+							<p className="truncate text-sm font-semibold text-n-700">José Victor</p>
+							<p className="truncate text-xs text-n-500">Administrador</p>
+						</div>
+					</div>
+					<Button
+						type="button"
+						variant="ghost"
+						size="icon"
+						className="size-8 shrink-0 text-n-700 hover:bg-n-20"
+						onClick={() => navigate('/login')}
+						aria-label="Sair"
+					>
+						<DoorOpen className="size-5" />
+					</Button>
+				</div>
 			</SidebarFooter>
 		</Sidebar>
 	)
