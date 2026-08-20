@@ -34,7 +34,7 @@ export type { GestanteFormValues }
 
 interface GestantesContextValue {
 	gestantes: Gestante[]
-	addGestante: (dados: GestanteFormValues) => void
+	addGestante: (dados: GestanteFormValues) => string
 	updateGestante: (id: string, dados: GestanteFormValues) => void
 }
 
@@ -46,7 +46,11 @@ export function GestantesProvider({ children }: { children: ReactNode }) {
 	const value = useMemo<GestantesContextValue>(
 		() => ({
 			gestantes,
-			addGestante: (dados) => setGestantes((atual) => [...atual, { id: crypto.randomUUID(), ...dados }]),
+			addGestante: (dados) => {
+				const id = crypto.randomUUID()
+				setGestantes((atual) => [...atual, { id, ...dados }])
+				return id
+			},
 			updateGestante: (id, dados) =>
 				setGestantes((atual) => atual.map((gestante) => (gestante.id === id ? { ...gestante, ...dados } : gestante))),
 		}),

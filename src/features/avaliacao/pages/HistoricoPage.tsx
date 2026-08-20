@@ -1,25 +1,13 @@
 import type { ColumnDef } from '@tanstack/react-table'
+import { useNavigate } from 'react-router-dom'
 
 import { Badge } from '@/components/ui/badge'
 import { DataTable } from '@/components/ui/data-table'
 import { Page } from '@/components/Layout/Page'
 import { formatarDataBr } from '@/features/core/utils/date'
+import { type HistoricoAplicacao, HISTORICO } from '@/features/avaliacao/utils/avaliacaoMock'
 import { VULNERABILIDADE_BADGE_VARIANT, VULNERABILIDADE_LABEL } from '@/features/gestantes/constants/vulnerabilidade'
 import type { Vulnerabilidade } from '@/features/gestantes/types/gestante'
-
-interface HistoricoAplicacao {
-	id: string
-	gestante: string
-	data: string
-	vulnerabilidade: Vulnerabilidade
-	aplicadoPor: string
-}
-
-const HISTORICO: HistoricoAplicacao[] = [
-	{ id: 'h1', gestante: 'Antonietta Silva', data: '2026-08-12', vulnerabilidade: 'baixa', aplicadoPor: 'José Victor' },
-	{ id: 'h2', gestante: 'Patricia Ferreira', data: '2026-08-05', vulnerabilidade: 'alta', aplicadoPor: 'José Victor' },
-	{ id: 'h3', gestante: 'Claudiana Cruz', data: '2026-07-28', vulnerabilidade: 'moderada', aplicadoPor: 'José Victor' },
-]
 
 const columns: ColumnDef<HistoricoAplicacao>[] = [
 	{
@@ -47,6 +35,8 @@ const columns: ColumnDef<HistoricoAplicacao>[] = [
 ]
 
 export function HistoricoPage() {
+	const navigate = useNavigate()
+
 	return (
 		<Page title="Histórico" description="Aplicações da Escala já realizadas.">
 			<DataTable
@@ -54,6 +44,7 @@ export function HistoricoPage() {
 				data={HISTORICO}
 				emptyStateTitle="Nenhuma aplicação registrada."
 				emptyStateDescription="As aplicações da escala aparecerão aqui."
+				onRowClick={(row) => navigate(`/historico/${row.id}`)}
 			/>
 		</Page>
 	)

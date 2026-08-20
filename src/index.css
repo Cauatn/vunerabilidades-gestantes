@@ -53,7 +53,9 @@
 	--o-100: #ffefeb;
 	--o-400: #ff7a59;
 
+	--b-200: #c7d9f7;
 	--b-100: #e6effe;
+	--b-50: #f2f6fe;
 	--b-400: #467bd8;
 	--b-600: #19438a;
 	--b-700: #2051a7;
@@ -105,7 +107,9 @@
 	--color-o-100: var(--o-100);
 	--color-o-400: var(--o-400);
 
+	--color-b-50: var(--b-50);
 	--color-b-100: var(--b-100);
+	--color-b-200: var(--b-200);
 	--color-b-400: var(--b-400);
 	--color-b-600: var(--b-600);
 	--color-b-700: var(--b-700);

@@ -9,6 +9,7 @@ interface DataTableProps<TData, TValue> {
 	isLoading?: boolean
 	emptyStateTitle?: string
 	emptyStateDescription?: string
+	onRowClick?: (row: TData) => void
 }
 
 export function DataTable<TData, TValue>({
@@ -17,6 +18,7 @@ export function DataTable<TData, TValue>({
 	isLoading,
 	emptyStateTitle = 'Nenhum registro encontrado.',
 	emptyStateDescription = 'Assim que houver dados, eles aparecerão aqui.',
+	onRowClick,
 }: DataTableProps<TData, TValue>) {
 	const table = useReactTable({
 		data: data ?? [],
@@ -61,7 +63,11 @@ export function DataTable<TData, TValue>({
 
 				<TableBody>
 					{table.getRowModel().rows.map((row) => (
-						<TableRow key={row.id} className="hover:bg-n-20">
+						<TableRow
+							key={row.id}
+							className={onRowClick ? 'cursor-pointer hover:bg-n-20' : 'hover:bg-n-20'}
+							onClick={onRowClick ? () => onRowClick(row.original) : undefined}
+						>
 							{row.getVisibleCells().map((cell) => (
 								<TableCell
 									key={cell.id}

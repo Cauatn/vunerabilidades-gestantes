@@ -24,9 +24,10 @@ interface GestanteSheetProps {
 	open: boolean
 	onOpenChange: (open: boolean) => void
 	onSubmit: (dados: GestanteFormValues) => void
+	nomeInicial?: string
 }
 
-export function GestanteSheet({ gestante, open, onOpenChange, onSubmit }: GestanteSheetProps) {
+export function GestanteSheet({ gestante, open, onOpenChange, onSubmit, nomeInicial }: GestanteSheetProps) {
 	const isEdit = !!gestante
 	const {
 		register,
@@ -50,10 +51,10 @@ export function GestanteSheet({ gestante, open, onOpenChange, onSubmit }: Gestan
 							cns: gestante.cns,
 							vulnerabilidade: gestante.vulnerabilidade,
 						}
-					: VALORES_VAZIOS,
+					: { ...VALORES_VAZIOS, nome: nomeInicial ?? '' },
 			)
 		}
-	}, [open, gestante, reset])
+	}, [open, gestante, nomeInicial, reset])
 
 	return (
 		<Sheet open={open} onOpenChange={onOpenChange}>
