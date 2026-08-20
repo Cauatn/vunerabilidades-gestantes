@@ -1,6 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { GripVertical, Plus, Trash2 } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
@@ -34,6 +35,12 @@ export function SortablePerguntaCard({
 }: SortablePerguntaCardProps) {
 	const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: pergunta.id })
 
+	const [categoriaLocal, setCategoriaLocal] = useState(pergunta.categoria)
+
+	useEffect(() => {
+		setCategoriaLocal(pergunta.categoria)
+	}, [pergunta.categoria])
+
 	return (
 		<Card
 			ref={setNodeRef}
@@ -57,9 +64,10 @@ export function SortablePerguntaCard({
 							<Label htmlFor={`categoria-${pergunta.id}`}>Categoria</Label>
 							<Input
 								id={`categoria-${pergunta.id}`}
-								value={pergunta.categoria}
+								value={categoriaLocal}
 								placeholder="Ex.: Condições socioeconômicas"
-								onChange={(event) => onCategoriaChange(pergunta.id, event.target.value)}
+								onChange={(event) => setCategoriaLocal(event.target.value)}
+								onBlur={() => onCategoriaChange(pergunta.id, categoriaLocal)}
 							/>
 						</div>
 						<div className="space-y-1.5">
